@@ -20,7 +20,7 @@ export const getFlatCancellationCharge = (classType: string) => {
   }
 };
 
-export const estimateRefund = (values: Values) => {
+export const estimateDeduction = (values: Values) => {
   const departureDate = dayjs(values.departureTime);
   const currentDate = dayjs();
   if (departureDate.diff(currentDate, "hours") > 48) {

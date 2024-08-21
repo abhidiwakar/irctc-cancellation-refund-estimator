@@ -8,7 +8,7 @@ import Select from "./components/Select";
 import TextInput from "./components/TextInput";
 import { Values } from "./types/core-form-values.type";
 import { TRAIN_CLASSES } from "./utils/constants";
-import { estimateRefund, handleFormValidation } from "./utils/core";
+import { estimateDeduction, handleFormValidation } from "./utils/core";
 
 const initialValues: Values = {
   departureTime: "",
@@ -30,11 +30,13 @@ export default function App() {
     helper: FormikHelpers<Values>
   ) => {
     helper.resetForm();
-    const refundAmount = estimateRefund(values);
-    if (refundAmount === null) {
+    const deductionAmount = estimateDeduction(values);
+    if (deductionAmount === null) {
       toast.error("Failed to calculate estimated refund!");
       return;
     }
+
+    const refundAmount = Number(values.ticketPrice) - deductionAmount;
 
     setRefundAmount(refundAmount);
     refundAmountModalRef.current?.showModal();
