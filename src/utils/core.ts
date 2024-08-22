@@ -42,7 +42,7 @@ export const estimateDeduction = (values: Values) => {
     return Math.max(flatDeduction ?? 0, deduction);
   }
 
-  return 0;
+  return Number(values.ticketPrice);
 };
 
 export const handleFormValidation = (values: FormikValues) => {
